@@ -1,0 +1,1 @@
+copy folder hardware to c:\Users\[user name]\Documents\Arduino\
