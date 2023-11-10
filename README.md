@@ -7,3 +7,7 @@ Arduino Leonardo (Pro micro) code for Joystick
 STL files
 https://disk.yandex.ru/d/1Z_J6kAdmps9BQ
 
+Libraries:
+https://github.com/gmarty2000-ARDUINO/arduino-JOYSTICK
+https://github.com/PaulStoffregen/Encoder
+
