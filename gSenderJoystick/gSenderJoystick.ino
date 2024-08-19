@@ -50,6 +50,8 @@ enum MODE { NONE = 1 << 4,
             ZAXIS = 1 << 7,
             AAXIS = 1 << 8 };
 
+uint16_t debounce[] = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+
 // MAIN PROGRAM CYCLE
 void loop() {
   int32_t state = 0;
@@ -60,6 +62,18 @@ void loop() {
   state |= (!digitalRead(A2) != LOW) << 11;
   state |= (!digitalRead(A1) != LOW) << 12;
   state |= (!digitalRead(A0) != LOW) << 13;
+
+  // debounce
+  for (int t = 0; t < 16; t++) {
+    int val = state & (1 << t);
+    if (val) {
+      if (debounce[t] == 32768) state |= (1 << t);
+      else debounce[t] <<= 1;
+    } else {
+      if (debounce[t] == 1) ~(1 << t);
+      else debounce[t] >>= 1;
+    }
+  }
 
   int pulses = SideEncoder.read() / PULSE_DIVIDER;
 
@@ -125,4 +139,5 @@ void loop() {
 
     oldState = state;
   }
+  delay(1);
 }
