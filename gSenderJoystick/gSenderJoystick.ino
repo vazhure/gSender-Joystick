@@ -70,7 +70,7 @@ void loop() {
       if (debounce[t] == 32768) state |= (1 << t);
       else debounce[t] <<= 1;
     } else {
-      if (debounce[t] == 1) ~(1 << t);
+      if (debounce[t] == 1) state &= ~(1 << t);
       else debounce[t] >>= 1;
     }
   }
