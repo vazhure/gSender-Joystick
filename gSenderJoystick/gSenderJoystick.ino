@@ -67,10 +67,10 @@ void loop() {
   for (int t = 0; t < 16; t++) {
     int val = state & (1 << t);
     if (val) {
-      if (debounce[t] == 32768) state |= (1 << t);
+      if (debounce[t] == 32768) state |= ((int32_t)1 << t);
       else debounce[t] <<= 1;
     } else {
-      if (debounce[t] == 1) state &= ~(1 << t);
+      if (debounce[t] == 1) state &= ~((int32_t)1 << t);
       else debounce[t] >>= 1;
     }
   }
